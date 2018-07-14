@@ -1,0 +1,31 @@
+gcc -o main Pmatrix_mul.c -fPIC -DMKL_ILP64 -m64 -I/opt/intel/mkl/include -L/opt/intel/mkl/lib/intel64 -lmkl_intel_ilp64 -lmkl_gf_ilp64 -lmkl_sequential -lmkl_core -lpthread -lm -ldl
+
+gcc -O3 -o main Pmatrix_mul.c -fPIC -DMKL_ILP64 -m64 -I/opt/intel/mkl/include -L/opt/intel/mkl/lib/intel64 -lmkl_intel_ilp64 -lmkl_gf_ilp64 -lmkl_sequential -lmkl_core -lpthread -lm -ldl
+
+gcc -O3 -o main main.c Pgen.c -fPIC -DMKL_ILP64 -m64 -I/opt/intel/mkl/include -L/opt/intel/mkl/lib/intel64 -lmkl_intel_ilp64 -lmkl_gf_ilp64 -lmkl_sequential -lmkl_core -lpthread -lm -ldl
+
+gcc -O3 -unroll-aggressive -opt-prefetch -o main main.c Pgen.c -fPIC -DMKL_ILP64 -m64 -I/opt/intel/mkl/include -L/opt/intel/mkl/lib/intel64 -lmkl_intel_ilp64 -lmkl_gf_ilp64 -lmkl_sequential -lmkl_core -lpthread -lm -ldl
+
+gcc -march=native -O3 -unroll-aggressive -o main main.c Pgen.c lte_dfts.c -fPIC -DMKL_ILP64 -m64 -I/opt/intel/mkl/include -L/opt/intel/mkl/lib/intel64 -lmkl_intel_ilp64 -lmkl_gf_ilp64 -lmkl_sequential -lmkl_core -lpthread -lm -ldl -mavx2
+
+for linking shared libraries
+fix bug: undefine to mkl....
+Only if you would like to create a 64bit build: Advanced Settings -> GCC C++ Compiler -> Miscellaneous -> All Options: Add -fPIC
+
+
+for correct linking
+https://software.intel.com/en-us/articles/intel-mkl-link-line-advisor/
+
+for manually searching linking
+fix bugg: cannnot find function
+https://stackoverflow.com/questions/15935866/linking-intels-mkl-blas-lapack-to-gcc
+cd /mkl/lib/intel64
+nm -A *.a | egrep '[TWBD] (dger_|dgemv_|dgetrf_|dgetri_)$'
+
+
+example running clbas
+http://clmathlibraries.github.io/clBLAS/group__GEMV.html
+http://clmathlibraries.github.io/clBLAS/example_sgemv_8c-example.html#a3
+
+install mkl
+https://gist.github.com/pachamaltese/afc4faef2f191b533556f261a46b3aa8
