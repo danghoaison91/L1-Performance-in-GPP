@@ -22,13 +22,11 @@
 
 
 #include <stdint.h>
-#include <stdio.h>
 
 
 //#include "PHY/defs.h"
 //#include "PHY/extern.h"
 #include "defs.h"
-
 
 #define ONE_OVER_SQRT2_Q15 23170
 #define ONE_OVER_SQRT3_Q15 18919
@@ -4801,7 +4799,7 @@ void idft2048(int16_t *x,int16_t *y,int scale)
 #ifndef __AVX2__
 void dft4096(int16_t *x,int16_t *y,int scale)
 {
-
+	printf("Not AVX2");
   simd_q15_t xtmp[1024],ytmp[1024],*tw4096_128p=(simd_q15_t *)tw4096,*x128=(simd_q15_t *)x,*y128=(simd_q15_t *)y,*y128p=(simd_q15_t *)y;
   simd_q15_t *ytmpp = &ytmp[0];
   int i,j;
@@ -4917,6 +4915,7 @@ void idft4096(int16_t *x,int16_t *y,int scale)
 void dft4096(int16_t *x,int16_t *y,int scale)
 {
 
+  printf("AVX2");
   simd256_q15_t xtmp[512],ytmp[512],*tw4096_256p=(simd256_q15_t *)tw4096,*x256=(simd256_q15_t *)x,*y256=(simd256_q15_t *)y,*y256p=(simd256_q15_t *)y;
   simd256_q15_t *ytmpp = &ytmp[0];
   int i,j;

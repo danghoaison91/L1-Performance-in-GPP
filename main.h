@@ -17,7 +17,10 @@
 #include "defs.h"
 
 struct Time{
-	struct timespec start, end;
+	clock_t start;
+	clock_t end;
+	clock_t diff;
+	clock_t cpuTime;
 	double runTime;
 } ;
 
