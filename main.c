@@ -271,6 +271,7 @@ int main(int argc, char** argv) {
 	MKL_free(data1.a);
 	MKL_free(data1.b);
 	MKL_free(data1.c);
+        free(data1.params);
 	free(data1.x);
 	free(data1.y);
 
@@ -278,6 +279,7 @@ int main(int argc, char** argv) {
 	MKL_free(data2.a);
 	MKL_free(data2.b);
 	MKL_free(data2.c);
+        free(data2.params);
 	free(data2.x);
 	free(data2.y);
 
