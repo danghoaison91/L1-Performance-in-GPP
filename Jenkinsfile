@@ -16,8 +16,7 @@ pipeline {
     stage('Run performance measuremance') {
       steps {
         sh '''export LD_LIBRARY_PATH=/opt/intel/lib/intel64:/opt/intel/mkl/lib/intel64:${LD_LIBRARY_PATH}
-./main
-echo "Run completed""'''
+./main'''
       }
     }
     stage('Test code coverage') {
